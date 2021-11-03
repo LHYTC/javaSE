@@ -5,7 +5,7 @@ package com.leno.thread;
  * @Title:
  * @Package
  * @Description:
- * @date 2021-11-03 00:34
+ * @date 2021-11-03 00:32
  */
 public class ThreadTest03 implements Runnable{
     public static void main(String[] args) {

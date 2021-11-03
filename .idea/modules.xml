@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/basis/basis.iml" filepath="$PROJECT_DIR$/basis/basis.iml" />
+      <module fileurl="file://$PROJECT_DIR$/highgrade/highgrade.iml" filepath="$PROJECT_DIR$/highgrade/highgrade.iml" />
+    </modules>
+  </component>
+</project>
