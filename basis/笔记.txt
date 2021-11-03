@@ -1,0 +1,218 @@
+一、StringBuffer与StringBuilder
+    相同点：都是可变字符数组。
+    不同点：StringBuffer是线程安全的，StringBuilder是线程不安全的
+
+二、时间处理相关类
+
+三、枚举
+    1.枚举是由一组固定的常量组成的类型
+    2.枚举的好处：
+        1）类型安全
+        2）易于输入
+        3）代码清晰
+    3.枚举类型
+        1）只能取特定值中的一个
+        2）使用enum关键字
+        3）所有的枚举类型隐性地继承自java.lang.Enum,枚举的实质还是类，
+           而每个被枚举的成员实质就是一个枚举类型的实例，他们默认都是
+           public static final类型的，可以直接通过枚举类型名直接使用
+           他们。
+        4）强烈建议当你需要定义一组常量时，使用枚举类型
+
+集合：
+    1.为什么要使用集合：动态改变存储的大小
+    2.java 集合框架：
+        1）Collection: 存放的是单一值
+              特点：
+                ·可以存放不同类型的数据，而数组只能存放固定类型的数据
+                ·当使用ArrayList子类实现的时候，初始化的长度是10，当长度不够的时候会进行自动扩容操作
+              api方法：
+                add:要求传入的参数是Object对象，因此当写入基本数据类型的时候，包含了自动拆箱和自动装箱的过程
+                addAll: 添加另外的一个集合追加到本集合的后面
+                clear:清空集合中的元素。
+                contains: 判断集合中是否包含指定的元素值。
+                containsAll: 判断集合中是否包含指定的集合。
+                isEmpty:判断集合是否为空
+                remove:删除指定元素
+                removeAll：删除指定的集合
+                retainAll：判断两个集合是否存在包含关系
+                size:返回当前集合的大小。
+                toArray: 将集合转换成数组
+         2）集合的特点：
+            · Collection 接口存储一组不唯一，无序的对象
+            · List接口存储一组不唯一，有序（插入顺序）的对象
+            · set 接口存储一直唯一，无序的对象
+            · Map接口存储一组键值对象，提供key到value的映射
+
+         3）List集合：
+            凡是可以操作索引的方法都是该体系特有的方法
+            1.增：
+                add(index,element) 在指定索引的位置上插入元素。
+                addAll(index,Collection) 在指定的索引位置插入整个集合元素
+                addAll(Collection)在结束插入整个集合元素
+            2.删：remove(index) 根据索引删除指定的元素
+            3.改：set(index,element) 使用element替换指定索引位置上的元素
+            4.查：
+                get(index) 获取元素
+                subList(from, to) 获取指定起始位置和结束位置的子集合
+                listIterator()接口： 所有的集合类都默认实现了Iterable的接口，实现此接口意味着具备了增强for循环;
+                                     在iterator的方法中，要求返回一个Iterator的接口子类实例对象，此接口中包含了hasNext(),next();
+
+            Vector也是List接口的一个子类实现
+            Vector和ArrayList一样，底层都是使用数组进行实现的
+            Vector和ArrayList的区别：
+                1. ArrayList是线程不安全的，效率高；Vector是线程安全的，效率低。
+                2. ArrayList在进行扩容的时候，是扩容原来长度的1.5倍， Vector是原来的两倍。
+
+            Iterator接口：
+                所有实现Collection接口的容器类都有一个iterator方法用以返回一个实现了Iterator接口对象。
+                Iterator对象称作迭代器，用以方便的实现对容器内元素的遍历操作
+                Iterator定义了如下方法：
+                    boolean hasNext(); //判断是否有元素没有被遍历
+                    Object next(); //返回游标当前位置的元素并将游标移动到下一个位置
+                    void remove(); //删除游标左边的元素，在执行完next之后该操作只能执行一次
+            Set接口中的实现类：
+                set接口：
+                    -set接口存储唯一，无序对象
+                    -存入和取出的顺序不一定一致
+                    -操作数据的方法与list类似，set接口不存在get()方法。
+                    -set
+                        |----HashSet
+                                    |----LinkedHashSet
+                        |----TreeSet
+                    HashSet:采用Hashtable哈希表存储结构
+                        优点：添加速度快，查询速度快，删除速度快
+                        缺点：无序
+                    LinkedHashSet:采用哈希表存储结构，同时使用链表维护次序，有序（添加顺序）
+                    TreeSet:采用二叉树（红黑树）的存储结构。
+                        优点：有序（排序后的升序）查询速度比list快
+                        缺点：查询速度没有HashSet快
+
+    3.泛型：
+        1）泛型类
+            在定义类的时候，在类名后面添加<T>起到占位的作用，类中的方法的返回值类型和属性的类型都可以使用
+        2）泛型接口
+            在定义接口的时候，在接口的名称后添加<T>
+            a.子类在进行实现的时候，可以不填写泛型的类型，此时在创建具体的子类的对象的时候才决定使用类型
+
+        3）泛型方法
+            在定义的方法的时候，指定方法的返回值和参数是泛型类型
+        4）泛型的上限
+                如果父类确定了，所有的子类都可以直接使用
+        5）泛型的下限
+                如果子类确定了，子类的所有父类都可以直接传递参数使用
+
+
+    5.IO流
+         File类：
+            File file = new File("abc.txt"); //无论当前文件是否存在，只要给定具体的路径，就可以返回相应的路径名称
+            -file.createNewFile(); //如果文件不存在，在创建一个新的文件
+            -file.canExecute(); //设置文件和操作
+            -file.canRead(); //设置文件可读
+            -file.canWrite(); //设置文件可写
+            -file.exists(); //判断文件是否存在
+            -file.getName(); //获取文件名称
+            -file.getAbsolutePath(); //获取文件的绝对路径
+            -file.getParent(); //获取文件的父路径名称，如果文件路径中只包含文件名称，则返回null
+            -file.getCanonicalPath(); //获取文件的规范形式的绝对路径，在windows中文件的分隔符是"\",linux中是"/"。
+            -File.separator; //获取当前系统的文件路径分隔符
+            -file.isDirectory(); //判断文件是否是目录
+            -file.isFile();//判断当前文件是否是文件，如果文件不存在一样回返回false
+            -file.list(); //
+            -file.listFiles();
+            -file.mkdir(); //创建单级目录
+            -file.mkdirs(); //创建多级目录
+
+         流的基本概念：流是指一连串流动的字符，是以先进先出方式发送信息的通道，在java中需要读写文件中的数据，需要使用流的概念，
+         流表示从一个文件将数据返送到另一个文件，包含一个流向的问题，最终需要选择一个参照物，当前程序作为参照物，从一个文件中
+         读取数据到程序叫做输入流，从程序输出数据到一个文件叫做输出流。
+            java流的分类：
+                按流向区分:
+                    -输出流:OutputStream和Writer作为基类
+                    -输入流:InputStream和Reader作为基类
+                按处理单元数据划分：
+                    -字节流：
+                        -字节输入流：InputStream作为基类
+                            InputStream:
+                                -ByteArrayInputStream:包含一个内部缓冲区，该缓冲区包含从流中读取的字节。
+                                -PipedInputStream：和PipedOutputStream一起使用，实现多线程间的管道通信。
+                                -FilterInputStream
+                                    -BufferedInputStream：用于为其他输入流提供缓冲功能
+                                    -DataInputStream
+                                -FileInputStream
+                                -ObjectInputStream
+                        -字节输出流：OutputStream作为基类
+                            OutputStream:
+                                -ByteArrayOutputStream
+                                -PipedOutputStream
+                                -FilterOutputStream
+                                    -BufferedOutputStream
+                                    -DataOutputStream
+                                    -PrintStream
+                                -FileOutputStream
+                                -ObjectOutputStream
+                    -字符流：
+                        -字符输入流：Reader作为基类
+                            Reader:
+                                -CharArrayReader
+                                -PipedReader
+                                -FilterReader
+                                -BufferedReader
+                                -InputStreamReader
+                                -FileReader
+                        -字符输出流：Writer作为基类
+                            Writer:
+                                -CharArrayWriter
+                                -PipedWriter
+                                -FilterWriter
+                                -BufferedWriter
+                                -OutputStreamWriter
+                                -FileWriter
+                                -PrintWriter
+                    字节流是8位通用字节流，字符流是16位Unicode字符流
+                按功能不同分：
+                    -节点流：可以直接从数据源或目的地读写数据
+                    -处理流（包装流）：不直接连接到数据的数据源或者目的地，是其他流进行封装，目的是简化操作和提高性能。
+
+                    -节点流和处理流的关系：
+                        -节点流处于IO操作的第一层，其他的IO操作都依赖他们进行。
+                        -处理流可以对其他流进行处理（提高效率或者是操作简便）
+
+         以上文件IO流操作，Apache提供了一个工具类FileUtils，需要导入一个jar包，Commons IO，相关的API查看apache commons io
+         jar包地址/依赖：
+         API地址：https://commons.apache.org/proper/commons-io/
+
+
+
+
+    6.Java多线程：
+        线程基础内容
+            -程序、进程与线程
+            -线程的创建与启动
+            -线程的生命周期
+        线程同步
+            -线程同步的必要性
+            -线程同步实现
+            -死锁
+        线程间通信
+            -线程间通信的必要性
+            -线程间通信的实现
+        推荐使用Runnable接口
+
+        线程的生命周期：
+            1.创建：使用new关键字创建对象，在内存中分配有相应的空间
+            2.就绪：通过调用start()方法进入就绪状态
+            3.阻塞：处于运行状态下的线程，如果执行了sleep()方法，或等待I/O设备等资源，将让出CPU进入阻塞状态，
+            4.运行
+            5.终止
+        线程操作的相关方法：
+            1.public static Thread currentThread(); //返回目前正在执行的线程
+            2.public final String getName(); //返回线程的名称
+            3.public final int getPriority(); //返回线程的优先级
+            4.public final void setPriority(String name); //设定线程优先级
+            5.public final boolean isAlive(); //判断线程是否在活动，如果是，返回true,否则返回false
+            6.public final void join(); //调用该方法的线程强制执行，其他线程处于阻塞状态，该线程执行完毕之后，其他线程再执行。
+            7.public static void sleep(long millis); //使当前正在执行的线程休眠millis秒，线程进入阻塞状态。
+            8.public static void yield(); //当前正在执行的线程暂停一次，允许其他线程执行，不阻塞，线程进入就绪状态。
+            9.public final void stop(); //强迫线程停止执行，已过时，不推荐使用
+
